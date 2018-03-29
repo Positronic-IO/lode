@@ -476,7 +476,7 @@ setup_mirrors()
     pushd "${BASE_DIR?}" > /dev/null
     test_create_dirs mirrors
     pushd mirrors > /dev/null || die "Error switching to mirrors"
-    test_git_or_bare_mirror core git://gerrit.libreoffice.org/core
+    test_git_or_bare_mirror core https://github.com/Positronic-IO/core.git
     popd > /dev/null
     popd > /dev/null
 }
@@ -549,7 +549,7 @@ repo="$1"
         die "dev/${repo} already exist"
     else
         pushd dev > /dev/null || die "Error switching to dev"
-        test_git_or_mirror_clone "core" git://gerrit.libreoffice.org/core "${repo}"
+        test_git_or_mirror_clone "core" https://github.com/Positronic-IO/core.git "${repo}"
         pushd "${repo}" > /dev/null || die "Error swithing to dev/${repo}"
         git config remote.origin.pushurl ssh://lode/core || die "Error setup the pushurl for ${repo}"
     fi
@@ -563,7 +563,7 @@ setup_dev()
     setup_ssh_config
     test_create_dirs dev
     pushd dev > /dev/null || die "Error switching to dev"
-    test_git_or_mirror_clone core git://gerrit.libreoffice.org/core core
+    test_git_or_mirror_clone core https://github.com/Positronic-IO/core.git core
     pushd core > /dev/null || die "Error swithing to dev/core"
     git config remote.origin.pushurl ssh://lode/core || die "Error setup the pushurl for core"
     if [ ! -f autogen.input ] ; then
